@@ -8,6 +8,7 @@ from angleDetector import angleDetector
 def main(img_path ):
     try: 
         img = cv2.imread(img_path, 0 )
+        h,w = img.shape # needed to put text on image
     except Exception as e:
         print(f"Exception {e} raised, please check if you have given a valid image path: {img_path}")
 
@@ -27,17 +28,21 @@ def main(img_path ):
 
     sample_im = var.draw_coords_on_black_im(var.line_arr[line_key])
     
+    angle = round(var.find_angle_wrt_x_axis(line_key),2 )
+    print(f"angle of line segment: {angle} degree")
+
+    print("plotting line segment")
     while True:
 
         cv2.imshow( "original image", img)
         # line segmet drawn
-        print("plotting line segment")
-        cv2.imshow( "temp", sample_im)
+        
+        cv2.putText(sample_im,f"angle: {angle} degrees ", (10,h-10), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255),1,2)
+
+        cv2.imshow( "lines_segment drawn from slope", sample_im)
         if cv2.waitKey(1) & 0xFF== ord('q'):
             break
 
-    angle = var.find_angle_wrt_x_axis(line_key)
-    print(f"angle of line segment: {angle} degree")
     return angle
 
 
