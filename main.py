@@ -24,10 +24,13 @@ def main(img_path ):
     # detect line in all the cluster
     var.line_detector()
 
+    # find the line segment in cluster
     line_key = var.only_keep_line()
 
+    # only for sanity check, draw back the line segment on image from slope and x corrdinates 
     sample_im = var.draw_coords_on_black_im(var.line_arr[line_key])
     
+    # angle of line segment
     angle = round(var.find_angle_wrt_x_axis(line_key),2 )
     print(f"angle of line segment: {angle} degree")
 
