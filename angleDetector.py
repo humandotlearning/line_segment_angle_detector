@@ -56,7 +56,7 @@ class angleDetector():
     X = self.coords
     y = pdist(X)
     Z = single(y)
-    self.clusters = fcluster(Z, 3, criterion='distance')
+    self.clusters = fcluster(Z, 1, criterion='distance')
     self.clusters = np.expand_dims(self.clusters, axis=1)    
     # remove empty arrays
     self.clusters[self.clusters.astype(bool)]
@@ -196,12 +196,7 @@ class angleDetector():
   def find_angle_wrt_x_axis(self,k):
     """
       find angle of a cluster assuming it is a line
-    """
-    # group = self.group_coords()
-    # self.group = group
-    # # (y1,x1),(y2,x2) = self.find_min_max_coord(group[k])
-    # # (y1,x1),(y2,x2) = self.find_min_max_wrt_x_coord(group[k])
-      
+    """      
     # subtracted by 180 because the angle is given wrt to top line (x axis)
     m,c = self.cluster_slope_dict[k]
     if m > 0:

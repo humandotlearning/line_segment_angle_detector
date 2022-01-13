@@ -1,6 +1,7 @@
 import cv2
 import argparse
 import matplotlib.pyplot as plt
+import numpy as np
 
 # all function for detecting line segment and angle
 from angleDetector import angleDetector
@@ -45,6 +46,12 @@ def main(img_path ):
         cv2.imshow( "lines_segment drawn from slope", sample_im)
         if cv2.waitKey(1) & 0xFF== ord('q'):
             break
+
+        img_with_line = np.concatenate((img, np.ones([h,2])*255), axis=1)
+        cv2.putText(img_with_line,f"original img ", (10,h-10), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255),1,2)
+
+        out_im = np.concatenate((img_with_line, sample_im), axis=1)
+        cv2.imwrite("out.jpg", out_im)
 
     return angle
 
