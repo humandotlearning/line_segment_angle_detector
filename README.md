@@ -21,20 +21,33 @@ average time taken to find angle of one image is: 1.5 seconds
 ## process followed to get line segment:
 1. read image as grayscale 
     * for faster processing, as keeping all the channels didn't add to the accuracy of the solution.
+    
 2. find all points greater than 0.
     * to reduce processing overhead by only considering valid points.
+    
 3. apply Single Linkage based hierarchical-clustering
     * doesn't require to provide number of cluster beforehand.
     * Single Linkage — The distances between the most similar members are calculated for each pair of clusters, and the clusters are then merged based on the shortest distance. ( simple yet effective method for this problem statement)
+    
 4. sort all points into seperate groups based on class assigned by clustering algorithm (hierarchical-clustering)
 5. assume all groups are line and find respective line equation for them.
     * find slope (m) and constant (b) for each cluster with an assumption that it could be a line.
+    * find coordinates (Xmin, Y1) and (Xmax, Y2) for each cluster and fit in equation:
+       * > m = ( Y2 - Y1)/(Xmax - Xmin)
+       * > b = Y2 - m * X2
+    
 6. find all y coordinates for each cluster based on the above calulated slope and constant.
     * fit all cluster to equation
     * > Y = m * X + b
+    
 7. find distance between line from line equation and actual coordinates.
 8. the group with the smallest distance should be the line.
 9. find angle from slope using tan inverse.
+      * the slope would be calculated w.r.t to the top line as X axis so to move it to first quadrant apply
+      * if slope is greater than 0:
+         * > angle = 180 - degrees(tan_inverse(m)) 
+      * else if slope is less than 0:
+         * > angle = abs( degrees(tan_inverse(m)) )
 
 
 references:
