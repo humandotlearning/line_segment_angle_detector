@@ -50,6 +50,11 @@ average time taken to find angle of one image is: 1.5 seconds
          * > angle = abs( degrees(tan_inverse(m)) )
 
 
+
+Future improvements:
+1. normalise the distance based on the number of points in the X axis in a cluster.
+
+
 references:
 1. https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.single.html#scipy.cluster.hierarchy.single
 2. https://www.analyticsvidhya.com/blog/2021/08/hierarchical-clustering-algorithm-python/ 
