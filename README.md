@@ -26,6 +26,7 @@ python main.py --img_path ./test_images/image5.jpg
 7. the group with the smallest distance should be the line
 8. find angle from slope using tan inverse.
 
+### time taken for output
 average time taken to find angle of one image is: 1.5 seconds
 
 references:
