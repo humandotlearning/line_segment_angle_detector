@@ -2,11 +2,13 @@ import cv2
 import argparse
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 # all function for detecting line segment and angle
 from angleDetector import angleDetector
 
 def main(img_path ):
+    start_time = time.time()
     try: 
         img = cv2.imread(img_path, 0 )
         h,w = img.shape # needed to put text on image
@@ -34,6 +36,9 @@ def main(img_path ):
     # angle of line segment
     angle = round(var.find_angle_wrt_x_axis(line_key),2 )
     print(f"angle of line segment: {angle} degree")
+
+    time_taken = time.time() - start_time
+    print(f"\ntime taken for finding angle of image is : {time_taken}")
 
     print("plotting line segment")
     while True:
